@@ -1,0 +1,453 @@
+import React, { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  ArrowRight,
+  MessageCircle,
+  Shield,
+  Rocket,
+  Gamepad2,
+  Cpu,
+  Clapperboard,
+  Link2,
+  Phone,
+  Mail,
+  CheckCircle2,
+  Menu,
+  X,
+  Sparkles,
+  PlayCircle,
+} from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+
+// --- Inline SVG Logo (crisper + accessible) ---
+function BrandPartnersLogo({ className = "w-48 h-12" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 520 120"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Brand Partners logo"
+    >
+      <defs>
+        <linearGradient id="bp-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#5b9dff" />
+          <stop offset="50%" stopColor="#7a5bff" />
+          <stop offset="100%" stopColor="#c25bff" />
+        </linearGradient>
+        <filter id="bp-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="coloredBlur" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <g transform="translate(10, 20)">
+        <path
+          d="M35 15 a20 20 0 1 1 0 40 h-8 a12 12 0 0 1 0-24 h8"
+          stroke="url(#bp-grad)"
+          strokeWidth="10"
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path
+          d="M65 55 a20 20 0 1 1 0-40 h8 a12 12 0 0 1 0 24 h-8"
+          stroke="url(#bp-grad)"
+          strokeWidth="10"
+          fill="none"
+          strokeLinecap="round"
+        />
+      </g>
+      <g transform="translate(110, 28)" filter="url(#bp-glow)">
+        <text
+          x="0"
+          y="38"
+          fontFamily="'Orbitron', ui-sans-serif, system-ui"
+          fontWeight="700"
+          fontSize="44"
+          fill="url(#bp-grad)"
+        >
+          Brand Partners
+        </text>
+        <text
+          x="2"
+          y="72"
+          fontFamily="'Inter', ui-sans-serif, system-ui"
+          fontWeight="500"
+          fontSize="16"
+          fill="#cbd5e1"
+        >
+          Gaming • Tech • Entertainment
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+// --- Nav ---
+function Nav({ onCTAClick }: { onCTAClick: () => void }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/30 border-b border-white/10">
+      <div className="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+        <a href="#top" aria-label="Go to top" className="shrink-0">
+          <BrandPartnersLogo className="w-56 h-14" />
+        </a>
+        {/* Desktop links */}
+        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-300">
+          <a href="#how" className="hover:text-white">How it works</a>
+          <a href="#services" className="hover:text-white">Services</a>
+          <a href="#niches" className="hover:text-white">Niches</a>
+          <a href="#proof" className="hover:text-white">Proof</a>
+          <a href="#contact" className="hover:text-white">Contact</a>
+        </nav>
+        <div className="hidden md:block">
+          <Button className="bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white shadow-lg shadow-indigo-500/20" onClick={onCTAClick}>
+            Get Started
+          </Button>
+        </div>
+        {/* Mobile menu */}
+        <button
+          className="md:hidden inline-flex items-center justify-center rounded-xl p-2 text-slate-200 hover:bg-white/10"
+          aria-label="Open menu"
+          onClick={() => setOpen(true)}
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      </div>
+      {open && (
+        <div className="md:hidden border-t border-white/10 bg-black/70 backdrop-blur">
+          <div className="mx-auto max-w-7xl px-4 py-4 space-y-4">
+            <div className="flex items-center justify-between">
+              <span className="text-slate-300">Menu</span>
+              <button className="rounded-xl p-2 hover:bg-white/10" aria-label="Close menu" onClick={() => setOpen(false)}>
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            {[
+              ["How it works", "#how"],
+              ["Services", "#services"],
+              ["Niches", "#niches"],
+              ["Proof", "#proof"],
+              ["Contact", "#contact"],
+            ].map(([label, href]) => (
+              <a key={href} href={href as string} className="block text-slate-200 py-2" onClick={() => setOpen(false)}>
+                {label}
+              </a>
+            ))}
+            <Button className="w-full bg-gradient-to-r from-indigo-500 to-fuchsia-500" onClick={() => { setOpen(false); onCTAClick(); }}>
+              Get Started
+            </Button>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+// --- Section helpers ---
+function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+  return (
+    <section id={id} className="mx-auto max-w-7xl px-4 py-16">
+      <h2 className="text-2xl md:text-3xl font-bold tracking-tight">{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+export default function BrandPartnersRemake() {
+  const [chatOpen, setChatOpen] = useState(false);
+  const [ctaFocus, setCtaFocus] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (ctaFocus) {
+      const el = document.getElementById("contact-form");
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [ctaFocus]);
+
+  const fadeUp = (delay = 0) => ({
+    initial: { y: prefersReducedMotion ? 0 : 12, opacity: 0 },
+    whileInView: { y: 0, opacity: 1 },
+    viewport: { once: true },
+    transition: { duration: 0.5, delay },
+  });
+
+  return (
+    <div id="top" className="min-h-screen bg-[#0a0a0f] text-slate-100 selection:bg-indigo-500/30">
+      {/* decorative glows */}
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div
+          className="absolute -top-40 -left-20 h-80 w-80 rounded-full blur-3xl opacity-30"
+          style={{ background: "radial-gradient(circle at center, #7a5bff, transparent 60%)" }}
+        />
+        <div
+          className="absolute -bottom-40 -right-20 h-96 w-96 rounded-full blur-3xl opacity-30"
+          style={{ background: "radial-gradient(circle at center, #5b9dff, transparent 60%)" }}
+        />
+      </div>
+
+      <Nav onCTAClick={() => setCtaFocus(true)} />
+
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <motion.h1
+              {...fadeUp(0)}
+              className="text-4xl md:text-6xl font-extrabold leading-tight"
+            >
+              Connecting {" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-fuchsia-400">Brands</span>
+              {" "}&
+              {" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400">Influencers</span>
+            </motion.h1>
+            <motion.p {...fadeUp(0.1)} className="mt-5 text-slate-300 text-lg max-w-xl">
+              We build strategic partnerships across <strong>Gaming</strong>, <strong>Tech</strong>, and <strong>Entertainment</strong>—pairing the right creators with the right brands to drive real results.
+            </motion.p>
+            <motion.div {...fadeUp(0.2)} className="mt-8 flex flex-wrap items-center gap-4">
+              <Button variant="secondary" className="bg-white/10 hover:bg-white/20" asChild>
+                <a href="#brands" className="flex items-center gap-2"><Link2 className="w-4 h-4"/> For Brands</a>
+              </Button>
+              <Button className="bg-gradient-to-r from-indigo-500 to-fuchsia-500" asChild>
+                <a href="#influencers" className="flex items-center gap-2"><Rocket className="w-4 h-4"/> For Influencers</a>
+              </Button>
+            </motion.div>
+            <motion.div {...fadeUp(0.3)} className="mt-6 flex items-center gap-4 text-slate-400 text-sm">
+              <div className="flex items-center gap-2"><Shield className="w-4 h-4"/> POPIA-friendly data handling</div>
+              <div className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4"/> Human + AI support</div>
+            </motion.div>
+          </div>
+
+          <motion.div {...fadeUp(0.15)} className="relative">
+            <div className="aspect-[4/3] rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-800 p-6 shadow-2xl">
+              <div className="grid grid-cols-6 gap-3">
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <div key={i} className="h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                    {i % 3 === 0 ? (
+                      <Gamepad2 className="w-6 h-6 text-indigo-300" />
+                    ) : i % 3 === 1 ? (
+                      <Cpu className="w-6 h-6 text-fuchsia-300" />
+                    ) : (
+                      <Clapperboard className="w-6 h-6 text-purple-300" />
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 text-sm text-slate-400">Sample creator grid • Replace with your own partners later</div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <Section id="how" title="How it works">
+        <div className="mt-8 grid md:grid-cols-3 gap-6">
+          {[
+            { title: "Brief & Goals", desc: "Brands share campaign objectives, audience, and budget.", icon: <Rocket className="w-5 h-5"/> },
+            { title: "Smart Matching", desc: "We shortlist creators using human vetting + AI insights.", icon: <Sparkles className="w-5 h-5"/> },
+            { title: "Launch & Report", desc: "We manage deliverables and report results transparently.", icon: <Shield className="w-5 h-5"/> },
+          ].map((s, idx) => (
+            <motion.div key={idx} {...fadeUp(idx * 0.05)}>
+              <Card className="bg-white/5 border-white/10">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-slate-100">{s.icon}{s.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-slate-300">{s.desc}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Services */}
+      <Section id="services" title="What we do">
+        <div className="mt-8 grid md:grid-cols-3 gap-6">
+          {[
+            { t: "Creator Sourcing", d: "Find on-brand talent in gaming, tech, and entertainment." },
+            { t: "Campaign Management", d: "Contracts, briefs, timelines — all handled for you." },
+            { t: "Content Strategy", d: "Shorts, livestreams, unboxings, launches, and more." },
+          ].map((item, i) => (
+            <motion.div key={i} {...fadeUp(i * 0.05)}>
+              <Card className="bg-white/5 border-white/10">
+                <CardHeader><CardTitle className="text-slate-100">{item.t}</CardTitle></CardHeader>
+                <CardContent><p className="text-slate-300">{item.d}</p></CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Niches */}
+      <Section id="niches" title="Our core niches">
+        <div className="mt-6 flex flex-wrap gap-3 text-sm">
+          {["Esports", "AAA Gaming", "Indie Games", "PC Hardware", "Mobile Tech", "Consumer Electronics", "Streaming & Film", "Music & Festivals"].map((tag) => (
+            <span key={tag} className="rounded-2xl border border-white/10 bg-white/5 px-3 py-1">{tag}</span>
+          ))}
+        </div>
+      </Section>
+
+      {/* Proof / Showcase */}
+      <Section id="proof" title="Case study snapshot">
+        <div className="mt-6 grid md:grid-cols-3 gap-6">
+          {[1,2,3].map((i) => (
+            <Card key={i} className="bg-white/5 border-white/10">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-slate-100">
+                  <PlayCircle className="w-5 h-5" /> Launch #{i}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-slate-300 text-sm">
+                <p>Brief: cross-platform reveal with top ZA creators.</p>
+                <ul className="mt-3 list-disc list-inside space-y-1">
+                  <li>+250k views in 7 days</li>
+                  <li>Avg. ER 5.1%</li>
+                  <li>CPV under industry avg.</li>
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      {/* Split for Brands / Influencers */}
+      <section id="brands" className="mx-auto max-w-7xl px-4 py-16 grid md:grid-cols-2 gap-8">
+        <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-800 p-8">
+          <h3 className="text-xl font-bold">For Brands</h3>
+          <p className="mt-2 text-slate-300">Brief us once. We’ll handle scouting, negotiations, and campaign ops.</p>
+          <ul className="mt-4 space-y-2 text-slate-300 list-disc list-inside">
+            <li>Creator shortlist in 48–72h (typical)</li>
+            <li>Performance-focused deliverables</li>
+            <li>Clear reporting & analytics</li>
+          </ul>
+          <Button className="mt-6 bg-gradient-to-r from-indigo-500 to-fuchsia-500" asChild>
+            <a href="#contact" className="flex items-center gap-2">Start a brief <ArrowRight className="w-4 h-4"/></a>
+          </Button>
+        </div>
+        <div id="influencers" className="rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-800 p-8">
+          <h3 className="text-xl font-bold">For Influencers</h3>
+          <p className="mt-2 text-slate-300">Join our roster for brand-safe partnerships that fit your audience.</p>
+          <ul className="mt-4 space-y-2 text-slate-300 list-disc list-inside">
+            <li>Niche-matched campaigns</li>
+            <li>Fair rates & timely payouts</li>
+            <li>Creative freedom respected</li>
+          </ul>
+          <Button variant="secondary" className="mt-6 bg-white/10 hover:bg-white/20" asChild>
+            <a href="#contact" className="flex items-center gap-2">Apply to roster <ArrowRight className="w-4 h-4"/></a>
+          </Button>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <Section id="contact" title="Contact">
+        <div className="mt-6 grid lg:grid-cols-3 gap-6">
+          <Card className="bg-white/5 border-white/10 lg:col-span-2">
+            <CardHeader>
+              <CardTitle className="text-slate-100">Let’s talk partnerships</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {/* Inline contact form (non-functional by default) */}
+              <form id="contact-form" className="grid md:grid-cols-2 gap-4" onSubmit={(e) => e.preventDefault()}>
+                <Input placeholder="Name" required aria-label="Your name" />
+                <Input type="email" placeholder="Email" required aria-label="Your email" />
+                <Input placeholder="Company (optional)" className="md:col-span-2" aria-label="Company" />
+                <Textarea placeholder="Your goals, budget, and timing" className="md:col-span-2 min-h-[120px]" required aria-label="Message" />
+                <div className="md:col-span-2 flex items-center justify-between gap-3">
+                  <p className="text-xs text-slate-400">By submitting, you agree to minimal POPIA-compliant processing.</p>
+                  <Button type="submit" className="bg-gradient-to-r from-indigo-500 to-fuchsia-500">Send</Button>
+                </div>
+              </form>
+              <div className="grid md:grid-cols-2 gap-4 text-slate-300 mt-6">
+                <div className="flex items-center gap-2"><Mail className="w-4 h-4"/> mothipamakgatho6@gmail.com</div>
+                <a className="flex items-center gap-2 hover:underline" href="https://wa.me/27648023100" target="_blank" rel="noreferrer">
+                  <Phone className="w-4 h-4"/> WhatsApp: 064 802 3100
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-white/5 border-white/10">
+            <CardHeader>
+              <CardTitle className="text-slate-100">Quick links</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2 text-slate-300">
+                <li><a href="#how" className="hover:underline">How it works</a></li>
+                <li><a href="#services" className="hover:underline">Services</a></li>
+                <li><a href="#brands" className="hover:underline">For Brands</a></li>
+                <li><a href="#influencers" className="hover:underline">For Influencers</a></li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </Section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 py-8 text-sm text-slate-400 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>© {new Date().getFullYear()} Brand Partners. All rights reserved.</div>
+          <div className="flex items-center gap-4">
+            <a href="#" className="hover:text-slate-200">Privacy</a>
+            <a href="#" className="hover:text-slate-200">Terms</a>
+          </div>
+        </div>
+      </footer>
+
+      {/* Floating AI Assistant (mock) */}
+      <div className="fixed bottom-6 right-6 z-50">
+        {!chatOpen && (
+          <Button
+            onClick={() => setChatOpen(true)}
+            className="rounded-full h-14 w-14 p-0 bg-gradient-to-br from-indigo-500 to-fuchsia-600 shadow-xl"
+            aria-label="Open chat"
+          >
+            <MessageCircle className="w-6 h-6" />
+          </Button>
+        )}
+
+        {chatOpen && (
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="w-[22rem] sm:w-[24rem] rounded-2xl border border-white/10 bg-slate-900/95 backdrop-blur p-4 shadow-2xl"
+            role="dialog"
+            aria-modal="true"
+            aria-label="AI Assistant chat"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2"><MessageCircle className="w-4 h-4"/><span className="font-semibold">AI Assistant</span></div>
+              <button onClick={() => setChatOpen(false)} className="text-slate-400 hover:text-slate-200" aria-label="Close chat">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="mt-3 h-56 overflow-y-auto space-y-3 text-sm">
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                Hi! I’m your assistant. Are you a <strong>brand</strong> or an <strong>influencer</strong>?
+              </div>
+              <div className="ml-auto max-w-[85%] p-3 rounded-xl bg-gradient-to-br from-indigo-500/30 to-fuchsia-500/30 border border-white/10">
+                I’m a brand — I want to launch a gaming campaign.
+              </div>
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                Awesome! Share your goals, budget, and timing. Or email <span className="underline">mothipamakgatho6@gmail.com</span> and we’ll reply fast.
+              </div>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <input className="flex-1 rounded-xl bg-white/5 border border-white/10 px-3 py-2 outline-none placeholder:text-slate-500" placeholder="Type a message…" aria-label="Type a message"/>
+              <Button className="bg-gradient-to-r from-indigo-500 to-fuchsia-500">Send</Button>
+            </div>
+            <div className="mt-2 text-[11px] text-slate-500">
+              To enable a real AI chat, replace this with a provider script (Tidio, Chatbase, etc.).
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </div>
+  );
+}
