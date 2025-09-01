@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand Partners</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .orbitron { font-family: 'Orbitron', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#0a0a0f] text-slate-100">
+
+  <!-- Glow Background -->
+  <div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-40 -left-20 h-80 w-80 rounded-full blur-3xl opacity-30" style="background: radial-gradient(circle at center, #7a5bff, transparent 60%)"></div>
+    <div class="absolute -bottom-40 -right-20 h-96 w-96 rounded-full blur-3xl opacity-30" style="background: radial-gradient(circle at center, #5b9dff, transparent 60%)"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 backdrop-blur bg-black/30 border-b border-white/10">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2 text-2xl font-bold">
+        <svg class="w-40 h-10" viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brand Partners logo">
+          <defs>
+            <linearGradient id="bp-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#5b9dff" />
+              <stop offset="50%" stop-color="#7a5bff" />
+              <stop offset="100%" stop-color="#c25bff" />
+            </linearGradient>
+          </defs>
+          <g transform="translate(10, 20)">
+            <path d="M35 15 a20 20 0 1 1 0 40 h-8 a12 12 0 0 1 0-24 h8" stroke="url(#bp-grad)" stroke-width="10" fill="none" stroke-linecap="round" />
+            <path d="M65 55 a20 20 0 1 1 0-40 h8 a12 12 0 0 1 0 24 h-8" stroke="url(#bp-grad)" stroke-width="10" fill="none" stroke-linecap="round" />
+          </g>
+          <g transform="translate(110, 28)">
+            <text x="0" y="38" class="orbitron" font-weight="700" font-size="44" fill="url(#bp-grad)">Brand Partners</text>
+            <text x="2" y="72" font-family="'Inter', sans-serif" font-weight="500" font-size="16" fill="#cbd5e1">Gaming • Tech • Entertainment</text>
+          </g>
+        </svg>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+        <a href="#how" class="hover:text-white">How it works</a>
+        <a href="#services" class="hover:text-white">Services</a>
+        <a href="#niches" class="hover:text-white">Niches</a>
+        <a href="#contact" class="hover:text-white">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white shadow-lg">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="mx-auto max-w-7xl px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+          Connecting <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-fuchsia-400">Brands</span> &
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400">Influencers</span>
+        </h1>
+        <p class="mt-5 text-slate-300 text-lg max-w-xl">
+          We build strategic partnerships across <strong>Gaming</strong>, <strong>Tech</strong>, and <strong>Entertainment</strong>—pairing the right creators with the right brands to drive real results.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a href="#brands" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20">For Brands</a>
+          <a href="#influencers" class="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500">For Influencers</a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-[4/3] rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-800 p-6 shadow-2xl">
+          <div class="grid grid-cols-6 gap-3">
+            <div class="h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-indigo-300">🎮</div>
+            <div class="h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-fuchsia-300">💻</div>
+            <div class="h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-purple-300">🎬</div>
+            <div class="h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-indigo-300">🎮</div>
+            <div class="h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-fuchsia-300">💻</div>
+            <div class="h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-purple-300">🎬</div>
+          </div>
+          <div class="mt-4 text-sm text-slate-400">Sample creator grid • Replace with your own partners later</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="mx-auto max-w-7xl px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold">How it works</h2>
+    <div class="mt-8 grid md:grid-cols-3 gap-6">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-semibold mb-2">🚀 Brief & Goals</h3>
+        <p class="text-slate-300">Brands share campaign objectives, audience, and budget.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-semibold mb-2">🔗 Smart Matching</h3>
+        <p class="text-slate-300">We shortlist creators using human vetting + AI insights.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-semibold mb-2">🛡️ Launch & Report</h3>
+        <p class="text-slate-300">We manage deliverables and report results transparently.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="mx-auto max-w-7xl px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold">What we do</h2>
+    <div class="mt-8 grid md:grid-cols-3 gap-6">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-semibold mb-2">Creator Sourcing</h3>
+        <p class="text-slate-300">Find on-brand talent in gaming, tech, and entertainment.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-semibold mb-2">Campaign Management</h3>
+        <p class="text-slate-300">Contracts, briefs, timelines — all handled for you.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="font-semibold mb-2">Content Strategy</h3>
+        <p class="text-slate-300">Shorts, livestreams, unboxings, launches, and more.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Niches -->
+  <section id="niches" class="mx-auto max-w-7xl px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold">Our core niches</h2>
+    <div class="mt-6 flex flex-wrap gap-3 text-sm">
+      <span class="rounded-2xl border border-white/10 bg-white/5 px-3 py-1">Esports</span>
+      <span class="rounded-2xl border border-white/10 bg-white/5 px-3 py-1">AAA Gaming</span>
+      <span class="rounded-2xl border border-white/10 bg-white/5 px-3 py-1">Indie Games</span>
+      <span class="rounded-2xl border border-white/10 bg-white/5 px-3 py-1">PC Hardware</span>
+      <span class="rounded-2xl border border-white/10 bg-white/5 px-3 py-1">Mobile Tech</span>
+      <span class="rounded-2xl border border-white/10 bg-white/5 px-3 py-1">Consumer Electronics</span>
+      <span class="rounded-2xl border border-white/10 bg-white/5 px-3 py-1">Streaming & Film</span>
+      <span class="rounded-2xl border border-white/10 bg-white/5 px-3 py-1">Music & Festivals</span>
+    </div>
+  </section>
+
+  <!-- For Brands / Influencers -->
+  <section id="brands" class="mx-auto max-w-7xl px-4 py-16 grid md:grid-cols-2 gap-8">
+    <div class="rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-800 p-8">
+      <h3 class="text-xl font-bold">For Brands</h3>
+      <p class="mt-2 text-slate-300">Brief us once. We’ll handle scouting, negotiations, and campaign ops.</p>
+      <ul class="mt-4 space-y-2 text-slate-300 list-disc list-inside">
+        <li>Creator shortlist in 48–72h (typical)</li>
+        <li>Performance-focused deliverables</li>
+        <li>Clear reporting & analytics</li>
+      </ul>
+      <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500">Start a brief →</a>
+    </div>
+    <div id="influencers" class="rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-800 p-8">
+      <h3 class="text-xl font-bold">For Influencers</h3>
+      <p class="mt-2 text-slate-300">Join our roster for brand-safe partnerships that fit your audience.</p>
+      <ul class="mt-4 space-y-2 text-slate-300 list-disc list-inside">
+        <li>Niche-matched campaigns</li>
+        <li>Fair rates & timely payouts</li>
+        <li>Creative freedom respected</li>
+      </ul>
+      <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20">Apply to roster →</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="mx-auto max-w-7xl px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold">Contact</h2>
+    <div class="mt-6 grid md:grid-cols-3 gap-6">
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6 md:col-span-2">
+        <h3 class="text-lg font-semibold">Let’s talk partnerships</h3>
+        <div class="mt-4 grid md:grid-cols-2 gap-4 text-slate-300">
+          <div>📧 brandpartners28@gmail.com</div>
+          <a href="https://t.me/0648023100" target="_blank" class="hover:underline">📱 Telegram: 064 802 3100</a>
+        </div>
+        <p class="mt-4 text-slate-400 text-sm">Prefer Telegram? Use the floating chat button below.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 class="text-lg font-semibold">Quick links</h3>
+        <ul class="mt-4 space-y-2 text-slate-300">
+          <li><a href="#how" class="hover:underline">How it works</a></li>
+          <li><a href="#services" class="hover:underline">Services</a></li>
+          <li><a href="#brands" class="hover:underline">For Brands</a></li>
+          <li><a href="#influencers" class="hover:underline">For Influencers</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 py-8 text-sm text-slate-400 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>© <span id="year"></span> Brand Partners. All rights reserved.</div>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-slate-200">Privacy</a>
+        <a href="#" class="hover:text-slate-200">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Telegram Button -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <a href="https://t.me/0648023100" target="_blank" class="rounded-full h-14 w-14 flex items-center justify-center bg-gradient-to-br from-indigo-500 to-fuchsia-600 shadow-xl text-white text-xl">✈️</a>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
